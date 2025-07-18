@@ -13,8 +13,8 @@ run_init_scripts() {
                 echo "Executing $script"
                 "$script"
             else
-                echo "Executing $script with sh"
-                sh "$script"
+                echo "Executing $script with bash"
+                bash "$script"
             fi
 
             if [ $? -ne 0 ]; then

@@ -2,6 +2,19 @@
 
 PHP_VERSION=$(php -r "echo phpversion();")
 
+a2enmod rewrite
+a2enmod headers
+
+if [ "$PDO_MYSQL_ENABLE" = "true" ]; then \
+    docker-php-ext-install pdo pdo_mysql &&  \
+    docker-php-ext-enable pdo_mysql; \
+fi
+
+if [ "$MYSQLI_ENABLE" = "true" ]; then \
+    docker-php-ext-install -j "$(nproc)" mysqli && \
+    docker-php-ext-enable mysqli; \
+fi
+
 if [ "$HTTP_ENABLE" = "true" ]; then \
     apt-get update && apt-get install -y \
         libpcre3-dev \
@@ -13,16 +26,6 @@ if [ "$HTTP_ENABLE" = "true" ]; then \
     docker-php-ext-install pcntl && \
     pecl install raphf && docker-php-ext-enable raphf && \
     pecl install pecl_http && docker-php-ext-enable http; \
-fi
-
-if [ "$MYSQLI_ENABLE" = "true" ]; then \
-    docker-php-ext-install -j "$(nproc)" mysqli && \
-    docker-php-ext-enable mysqli; \
-fi
-
-if [ "$PDO_MYSQL_ENABLE" = "true" ]; then \
-    docker-php-ext-install pdo pdo_mysql &&  \
-    docker-php-ext-enable pdo_mysql; \
 fi
 
 if [ "$GD_ENABLE" = "true" ]; then \

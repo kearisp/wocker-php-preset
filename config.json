@@ -11,7 +11,8 @@
             "options": [
                 "5.6-apache",
                 "7.4-apache",
-                "8.3-apache"
+                "8.3-apache",
+                "8.4-apache"
             ]
         },
         "EXTENSIONS": {
@@ -19,8 +20,8 @@
             "multiple": true,
             "message": "Extensions",
             "options": {
+                "PDO_MYSQL_ENABLE": "Mysql PDO",
                 "MYSQLI_ENABLE": "Mysqli",
-                "PDO_MYSQL_ENABLE": "PDO",
                 "PGSQL_ENABLE": "Pgsql",
                 "GD_ENABLE": "GD",
                 "ZIP_ENABLE": "Zip",

@@ -23,7 +23,8 @@ ARG SOCKETS_ENABLE=false
 ARG NODE_VERSION=''
 ARG COMPOSER_ENABLE=false
 
-ENV EXTENSIONS=$EXTENSIONS \
+ENV USER=$USER \
+    EXTENSIONS=$EXTENSIONS \
     HTTP_ENABLE=$HTTP_ENABLE \
     MYSQLI_ENABLE=$MYSQLI_ENABLE \
     PDO_MYSQL_ENABLE=$PDO_MYSQL_ENABLE \
@@ -43,9 +44,6 @@ ENV EXTENSIONS=$EXTENSIONS \
     NODE_VERSION=$NODE_VERSION \
     COMPOSER_ENABLE=$COMPOSER_ENABLE
 
-RUN a2enmod rewrite
-RUN a2enmod headers
-
 ADD ./.wocker/bin/entrypoint.sh /usr/local/bin/docker-entrypoint
 ADD ./.wocker/bin/compare-version /usr/local/bin/compare-version
 ADD ./.wocker/bin/ws-run-hook.sh /usr/local/bin/ws-run-hook
@@ -53,11 +51,11 @@ ADD ./.wocker/etc/apache2/sites-available/000-default.conf /etc/apache2/sites-av
 ADD ./.wocker/etc/apache2/apache2.conf /etc/apache2/apache2.conf
 COPY ./.wocker/etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-available/
 COPY ./.wocker/etc/wocker-build.d /etc/wocker-build.d
+COPY ./.wocker/etc/wocker-init.d /etc/wocker-init.d
 
-RUN usermod -u $UID -s /bin/bash $USER && \
-    mkdir -p /home/$USER && \
+RUN mkdir -p /home/$USER && \
+    usermod -d /home/$USER -u $UID -s /bin/bash $USER && \
     touch /home/$USER/.bashrc && \
-    chown -R $USER:$USER /home/$USER && \
     chmod +x /usr/local/bin/compare-version && \
     apt-get update --fix-missing -y && \
     apt-get install -y \
@@ -70,13 +68,13 @@ RUN usermod -u $UID -s /bin/bash $USER && \
     chmod +x /usr/local/bin/docker-entrypoint && \
     chmod 775 /usr/local/bin/ws-run-hook && \
     chmod +x /usr/local/bin/ws-run-hook && \
-    ws-run-hook build
+    ws-run-hook build && \
+    chown -R $USER:$USER /home/$USER
 
 ENV APACHE_DOCUMENT_ROOT /var/www
 WORKDIR $APACHE_DOCUMENT_ROOT
 
-EXPOSE 80
-EXPOSE 443
+EXPOSE 80 443
 
 USER $USER
 
