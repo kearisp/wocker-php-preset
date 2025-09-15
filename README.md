@@ -1,6 +1,6 @@
 # PHP preset for Wocker
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/kearisp/wocker-php-preset)
+[![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)](https://github.com/kearisp/wocker-php-preset)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 A lightweight and efficient preset for developing php applications with the Wocker workspace.
