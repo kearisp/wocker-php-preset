@@ -62,7 +62,6 @@ RUN mkdir -p /home/$USER && \
     chmod +x /usr/local/bin/compare-version && \
     apt-get update --fix-missing -y && \
     apt-get install -y \
-        tzdata \
         curl \
         git \
         build-essential \
