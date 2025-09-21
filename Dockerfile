@@ -24,7 +24,8 @@ ARG IMAGICK_ENABLE=false
 ARG NODE_VERSION=''
 ARG COMPOSER_ENABLE=false
 
-ENV USER=$USER \
+ENV TZ="Etc/UTC" \
+    USER=$USER \
     EXTENSIONS=$EXTENSIONS \
     HTTP_ENABLE=$HTTP_ENABLE \
     MYSQLI_ENABLE=$MYSQLI_ENABLE \
@@ -61,6 +62,7 @@ RUN mkdir -p /home/$USER && \
     chmod +x /usr/local/bin/compare-version && \
     apt-get update --fix-missing -y && \
     apt-get install -y \
+        tzdata \
         curl \
         git \
         build-essential \
