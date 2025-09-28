@@ -1,6 +1,6 @@
 {
     "name": "php",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "type": "dockerfile",
     "dockerfile": "./Dockerfile",
     "buildArgsOptions": {
@@ -34,7 +34,8 @@
                 "XDEBUG_ENABLE": "XDebug",
                 "GETTEXT_ENABLE": "GetText",
                 "BCMATH_ENABLE": "Bcmath",
-                "SOCKETS_ENABLE": "Sockets"
+                "SOCKETS_ENABLE": "Sockets",
+                "IMAGICK_ENABLE": "Imagick"
             }
         },
         "COMPOSER_ENABLE": {
