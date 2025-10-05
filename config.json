@@ -36,7 +36,10 @@
                 "GETTEXT_ENABLE": "GetText",
                 "BCMATH_ENABLE": "Bcmath",
                 "SOCKETS_ENABLE": "Sockets",
-                "IMAGICK_ENABLE": "Imagick"
+                "IMAGICK_ENABLE": "Imagick",
+                "REDIS_ENABLE": "Redis",
+                "LDAP_ENABLE": "Ldap",
+                "MONGODB_ENABLE": "Mongodb"
             }
         },
         "COMPOSER_ENABLE": {
