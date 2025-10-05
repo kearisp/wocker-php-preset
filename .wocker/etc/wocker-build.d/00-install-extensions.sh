@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 PHP_VERSION=$(php -r "echo phpversion();")
 
 a2enmod rewrite
@@ -16,7 +18,8 @@ if [ "$MYSQLI_ENABLE" = "true" ]; then
 fi
 
 if [ "$HTTP_ENABLE" = "true" ]; then
-    apt-get update && apt-get install -y \
+    apt-get update
+    apt-get install -y \
         libpcre3-dev \
         libssl-dev \
         libcurl4-openssl-dev \
@@ -24,8 +27,10 @@ if [ "$HTTP_ENABLE" = "true" ]; then
         g++ \
         zlib1g-dev
     docker-php-ext-install pcntl
-    pecl install raphf && docker-php-ext-enable raphf
-    pecl install pecl_http && docker-php-ext-enable http
+    pecl install raphf
+    docker-php-ext-enable raphf
+    pecl install pecl_http
+    docker-php-ext-enable http
 fi
 
 if [ "$GD_ENABLE" = "true" ]; then

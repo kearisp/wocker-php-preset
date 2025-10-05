@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [ "$COMPOSER_ENABLE" = "true" ]; then \
     apt-get update && \
         apt-get install -y bash-completion; \

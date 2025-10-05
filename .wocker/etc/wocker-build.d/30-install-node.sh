@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [ "$NODE_VERSION" != "" ] && [ "$NODE_VERSION" != "none" ]; then \
     mkdir -p $NVM_DIR; \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | PROFILE="/home/$USER/.bashrc" bash; \

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 NAME="$1"
 
 run_init_scripts() {
