@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 
@@ -15,8 +15,8 @@ run_init_scripts() {
                 echo "Executing $script"
                 "$script"
             else
-                echo "Executing $script with bash"
-                bash "$script"
+                echo "Executing $script with sh"
+                sh "$script"
             fi
 
             if [ $? -ne 0 ]; then

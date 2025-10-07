@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 
@@ -8,7 +8,7 @@ is_enabled() {
     OLD_IFS=$IFS
     IFS=','
 
-    for ext in $EXTENSIONS; do
+    for ext in $PHP_EXTENSIONS; do
         if [ "$ext" = "$value" ]; then
             found=0
             break
@@ -24,8 +24,6 @@ PHP_VERSION=$(php -r "echo phpversion();")
 
 a2enmod rewrite
 a2enmod headers
-
-apt-get update
 
 if [ "$PDO_MYSQL_ENABLE" = "true" ] || is_enabled "PDO_MYSQL_ENABLE"; then
     docker-php-ext-install pdo pdo_mysql
