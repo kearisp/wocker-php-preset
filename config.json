@@ -1,6 +1,6 @@
 {
     "name": "php",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "type": "dockerfile",
     "dockerfile": "./Dockerfile",
     "buildArgsOptions": {
@@ -11,11 +11,12 @@
             "options": [
                 "5.6-apache",
                 "7.4-apache",
+                "8.2-apache",
                 "8.3-apache",
                 "8.4-apache"
             ]
         },
-        "EXTENSIONS": {
+        "PHP_EXTENSIONS": {
             "type": "select",
             "multiple": true,
             "message": "Extensions",
@@ -35,7 +36,10 @@
                 "GETTEXT_ENABLE": "GetText",
                 "BCMATH_ENABLE": "Bcmath",
                 "SOCKETS_ENABLE": "Sockets",
-                "IMAGICK_ENABLE": "Imagick"
+                "IMAGICK_ENABLE": "Imagick",
+                "REDIS_ENABLE": "Redis",
+                "LDAP_ENABLE": "Ldap",
+                "MONGODB_ENABLE": "Mongodb"
             }
         },
         "COMPOSER_ENABLE": {
@@ -47,13 +51,16 @@
             "type": "select",
             "message": "Node version",
             "options": [
-                "none",
+                {
+                    "label": "none",
+                    "value": ""
+                },
                 "v17.9.1",
                 "v18.16.0",
                 "v20.19.5",
                 "v22.19.0",
                 "v23.11.1",
-                "v24.8.0"
+                "v24.9.0"
             ]
         }
     },

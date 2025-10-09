@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/sh
+
+set -e
 
 if [ "$COMPOSER_ENABLE" = "true" ]; then \
     apt-get update && \
