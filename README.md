@@ -24,20 +24,12 @@ ws preset:install php
 
 ## Usage
 
-### Build Scripts
-
-You can mount a directory with custom build scripts that will run on container build:
-
-```shell
-ws volume:mount ./my-build-scripts:/etc/wocker-build.d
-```
-
 ### Initialization Scripts
 
 You can mount a directory with custom initialization scripts that will run on container startup:
 
 ```shell
-ws volume:mount ./my-scripts:/etc/wocker-init.d
+ws volume:mount ./my-scripts:/etc/wocker/init-user.d
 ```
 
 Scripts are executed in alphabetical order. Consider using numeric prefixes (e.g., `10-setup.sh`, `20-migrate.sh`) to control execution order.

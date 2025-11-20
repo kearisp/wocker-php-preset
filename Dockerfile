@@ -56,8 +56,7 @@ ADD ./.wocker/bin/ws-run-hook /usr/local/bin/ws-run-hook
 ADD ./.wocker/etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
 ADD ./.wocker/etc/apache2/apache2.conf /etc/apache2/apache2.conf
 COPY ./.wocker/etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-available/
-COPY ./.wocker/etc/wocker-build.d /etc/wocker-build.d
-COPY ./.wocker/etc/wocker-init.d /etc/wocker-init.d
+COPY ./.wocker/etc/wocker /etc/wocker
 
 RUN mkdir -p /home/$USER && \
     usermod -d /home/$USER -u $UID -s /bin/sh $USER && \

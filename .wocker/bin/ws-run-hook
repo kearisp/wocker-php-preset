@@ -5,24 +5,30 @@ set -e
 NAME="$1"
 
 run_init_scripts() {
+    set -e
     local scripts_dir="$1"
 
     if [ -d "$scripts_dir" ]; then
         echo "Running $NAME scripts from $scripts_dir"
 
-        while read -r script; do
+        scripts=$(find "$scripts_dir" -type f -name "*.sh" | sort)
+        for script in $scripts; do
             if [ -x "$script" ]; then
                 echo "Executing $script"
-                "$script"
+                "$script" || {
+                    status=$?
+                    echo "Error: Script $script exited with non-zero $status status" >&2
+                    exit $status
+                }
             else
                 echo "Executing $script with sh"
-                sh "$script"
+                sh "$script" || {
+                    status=$?
+                    echo "Error: Script $script exited with non-zero $status status" >&2
+                    exit $status
+                }
             fi
-
-            if [ $? -ne 0 ]; then
-                echo "Warning: Script $script exited with non-zero status"
-            fi
-        done < <(find "$scripts_dir" -type f -name "*.sh" | sort)
+        done
 
         echo "Initialization scripts completed"
     else
@@ -32,9 +38,13 @@ run_init_scripts() {
 
 case "$NAME" in
     "init")
+        run_init_scripts "/etc/wocker/init.core.d"
+        run_init_scripts "/etc/wocker/init.d"
         run_init_scripts "/etc/wocker-init.d"
         ;;
     "build")
+        run_init_scripts "/etc/wocker/build.core.d"
+        run_init_scripts "/etc/wocker/build.d"
         run_init_scripts "/etc/wocker-build.d"
         ;;
     *)
