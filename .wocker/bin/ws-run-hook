@@ -10,7 +10,7 @@ run_init_scripts() {
     if [ -d "$scripts_dir" ]; then
         echo "Running $NAME scripts from $scripts_dir"
 
-        find "$scripts_dir" -type f -name "*.sh" | sort | while read -r script; do
+        while read -r script; do
             if [ -x "$script" ]; then
                 echo "Executing $script"
                 "$script"
@@ -22,7 +22,7 @@ run_init_scripts() {
             if [ $? -ne 0 ]; then
                 echo "Warning: Script $script exited with non-zero status"
             fi
-        done
+        done < <(find "$scripts_dir" -type f -name "*.sh" | sort)
 
         echo "Initialization scripts completed"
     else
