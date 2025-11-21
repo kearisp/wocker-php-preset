@@ -1,6 +1,6 @@
 # PHP preset for Wocker
 
-[![Version](https://img.shields.io/badge/version-1.0.3-blue.svg)](https://github.com/kearisp/wocker-php-preset)
+[![Version](https://img.shields.io/badge/version-1.0.4-blue.svg)](https://github.com/kearisp/wocker-php-preset)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 A lightweight and efficient preset for developing php applications with the Wocker workspace.
@@ -24,20 +24,12 @@ ws preset:install php
 
 ## Usage
 
-### Build Scripts
-
-You can mount a directory with custom build scripts that will run on container build:
-
-```shell
-ws volume:mount ./my-build-scripts:/etc/wocker-build.d
-```
-
 ### Initialization Scripts
 
 You can mount a directory with custom initialization scripts that will run on container startup:
 
 ```shell
-ws volume:mount ./my-scripts:/etc/wocker-init.d
+ws volume:mount ./my-scripts:/etc/wocker/init-user.d
 ```
 
 Scripts are executed in alphabetical order. Consider using numeric prefixes (e.g., `10-setup.sh`, `20-migrate.sh`) to control execution order.
