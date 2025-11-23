@@ -1,8 +1,8 @@
 {
     "name": "php",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "type": "dockerfile",
-    "dockerfile": "./Dockerfile",
+    "dockerfile": "./.wocker/Dockerfile",
     "buildArgsOptions": {
         "IMAGE_VERSION": {
             "message": "Image version",
@@ -60,7 +60,8 @@
                 "v20.19.5",
                 "v22.19.0",
                 "v23.11.1",
-                "v24.9.0"
+                "v24.9.0",
+                "v25.2.1"
             ]
         }
     },
