@@ -9,7 +9,8 @@ if grep -q "Alpine" /etc/os-release; then
         git \
         build-base \
         openssl-dev \
-        zlib-dev
+        zlib-dev \
+        shadow
 else
     apt-get update --fix-missing -y
     apt-get install -y \
@@ -19,3 +20,9 @@ else
         libssl-dev \
         zlib1g-dev
 fi
+
+mkdir -p /home/$USER
+usermod -d /home/$USER -u $UID -s /bin/sh $USER
+
+touch /home/$USER/.bashrc
+touch /home/$USER/.profile
