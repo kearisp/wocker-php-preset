@@ -52,7 +52,7 @@ fi
 
 if is_enabled "http"; then
     apt-get install -y \
-        libpcre3-dev \
+        libpcre2-dev \
         libssl-dev \
         libcurl4-openssl-dev \
         libicu-dev \
