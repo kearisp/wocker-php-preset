@@ -69,12 +69,16 @@ if is_enabled "gd"; then
     apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-        libpng-dev
+        libpng-dev \
+        libwebp-dev
     compare-version $PHP_VERSION "7.3" && \
-        docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include || \
-        docker-php-ext-configure gd --with-freetype --with-jpeg
+        docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include --with-webp-dir=/usr/include || \
+        docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
     docker-php-ext-install -j$(nproc) gd
     docker-php-ext-enable gd
+fi
+
+if is_enabled "exif"; then
     docker-php-ext-install exif
     docker-php-ext-enable exif
 fi
@@ -83,6 +87,21 @@ if is_enabled "zip"; then
     apt-get install -y libzip-dev zip unzip
     (compare-version $PHP_VERSION "7.3" && docker-php-ext-configure zip || docker-php-ext-configure zip --with-libzip)
     docker-php-ext-install -j "$(nproc)" zip
+fi
+
+if is_enabled "iconv" && ! php -m | grep -qix "iconv"; then
+    docker-php-ext-install -j "$(nproc)" iconv
+fi
+
+if is_enabled "opcache" && ! php -m | grep -qix "zend opcache"; then
+    docker-php-ext-install -j "$(nproc)" opcache
+    docker-php-ext-enable opcache
+fi
+
+if is_enabled "sodium"; then
+    apt-get install -y libsodium-dev
+    docker-php-ext-install -j "$(nproc)" sodium
+    docker-php-ext-enable sodium
 fi
 
 if is_enabled "memcache"; then

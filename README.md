@@ -63,7 +63,7 @@ Extensions are configured via a single `PHP_EXTENSIONS` build arg containing a c
 ws build-args:set PHP_EXTENSIONS=pdo_mysql,redis,xdebug
 ```
 
-Available options: `pdo_mysql`, `mysqli`, `pgsql`, `pdo_pgsql`, `gd`, `zip`, `memcache`, `memcached`, `http`, `intl`, `pcntl`, `soap`, `xdebug`, `uopz`, `gettext`, `bcmath`, `sockets`, `imagick`, `redis`, `ldap`, `mongodb`.
+Available options: `pdo_mysql`, `mysqli`, `pgsql`, `pdo_pgsql`, `gd`, `exif`, `zip`, `memcache`, `memcached`, `http`, `intl`, `pcntl`, `soap`, `xdebug`, `uopz`, `gettext`, `bcmath`, `sockets`, `imagick`, `redis`, `ldap`, `mongodb`, `iconv`, `opcache`, `sodium`.
 
 When `xdebug` is included, you can also set its mode via `XDEBUG_MODE`:
 

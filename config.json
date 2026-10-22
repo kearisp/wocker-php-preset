@@ -29,6 +29,7 @@
                 "pgsql": "Pgsql",
                 "pdo_pgsql": "Postgres PDO",
                 "gd": "GD",
+                "exif": "Exif",
                 "zip": "Zip",
                 "memcache": "Memcache",
                 "memcached": "Memcached",
@@ -44,7 +45,10 @@
                 "imagick": "Imagick",
                 "redis": "Redis",
                 "ldap": "Ldap",
-                "mongodb": "Mongodb"
+                "mongodb": "Mongodb",
+                "iconv": "Iconv",
+                "opcache": "Opcache",
+                "sodium": "Sodium"
             }
         },
         "XDEBUG_MODE": {
