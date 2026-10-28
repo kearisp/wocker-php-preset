@@ -1,6 +1,6 @@
 {
     "name": "php",
-    "version": "1.0.6",
+    "version": "2.0.0",
     "type": "dockerfile",
     "dockerfile": "./.wocker/Dockerfile",
     "buildArgsOptions": {
@@ -13,43 +13,84 @@
                 "7.4-apache",
                 "8.2-apache",
                 "8.3-apache",
-                "8.4-apache"
+                "8.4-apache",
+                "8.5-apache"
             ]
         },
         "PHP_EXTENSIONS": {
-            "type": "select",
-            "multiple": true,
             "message": "Extensions",
+            "type": "select",
+            "mode": "variable",
+            "delimiter": ",",
+            "multiple": true,
             "options": {
-                "PDO_MYSQL_ENABLE": "Mysql PDO",
-                "MYSQLI_ENABLE": "Mysqli",
-                "PGSQL_ENABLE": "Pgsql",
-                "GD_ENABLE": "GD",
-                "ZIP_ENABLE": "Zip",
-                "MEMCACHE_ENABLE": "Memcache",
-                "MEMCACHED_ENABLE": "Memcached",
-                "HTTP_ENABLE": "Raphf+Http",
-                "INTL_ENABLE": "Intl",
-                "PCNTL_ENABLE": "Pcntl",
-                "SOAP_ENABLE": "Soap",
-                "XDEBUG_ENABLE": "XDebug",
-                "GETTEXT_ENABLE": "GetText",
-                "BCMATH_ENABLE": "Bcmath",
-                "SOCKETS_ENABLE": "Sockets",
-                "IMAGICK_ENABLE": "Imagick",
-                "REDIS_ENABLE": "Redis",
-                "LDAP_ENABLE": "Ldap",
-                "MONGODB_ENABLE": "Mongodb"
+                "pdo_mysql": "Mysql PDO",
+                "mysqli": "Mysqli",
+                "pgsql": "Pgsql",
+                "pdo_pgsql": "Postgres PDO",
+                "gd": "GD",
+                "exif": "Exif",
+                "zip": "Zip",
+                "memcache": "Memcache",
+                "memcached": "Memcached",
+                "http": "Raphf+Http",
+                "intl": "Intl",
+                "pcntl": "Pcntl",
+                "soap": "Soap",
+                "xdebug": "XDebug",
+                "uopz": "Uopz",
+                "gettext": "GetText",
+                "bcmath": "Bcmath",
+                "sockets": "Sockets",
+                "imagick": "Imagick",
+                "redis": "Redis",
+                "ldap": "Ldap",
+                "mongodb": "Mongodb",
+                "iconv": "Iconv",
+                "opcache": "Opcache",
+                "sodium": "Sodium"
             }
+        },
+        "XDEBUG_MODE": {
+            "message": "Xdebug mode",
+            "type": "select",
+            "when": {
+                "variable": "PHP_EXTENSIONS",
+                "includes": "xdebug"
+            },
+            "options": [
+                "off",
+                "develop",
+                "coverage",
+                "debug",
+                "gcstats",
+                "profile",
+                "trace"
+            ],
+            "default": "debug"
         },
         "COMPOSER_ENABLE": {
             "message": "Install composer?",
             "type": "boolean",
             "default": false
         },
+        "COMPOSER_ALLOW_SUPERUSER": {
+            "when": {
+                "variable": "COMPOSER_ENABLE",
+                "equals": "true"
+            },
+            "message": "Composer allow superuser?",
+            "type": "boolean",
+            "default": false
+        },
+        "SLIM_IMAGE": {
+            "message": "Remove build tools (compilers, -dev headers) after build to shrink the image? Disable if you need to compile things (e.g. npm native modules) inside the running container.",
+            "type": "boolean",
+            "default": false
+        },
         "NODE_VERSION": {
-            "type": "select",
             "message": "Node version",
+            "type": "select",
             "options": [
                 {
                     "label": "none",
@@ -63,6 +104,15 @@
                 "v24.9.0",
                 "v25.2.1"
             ]
+        },
+        "NODE_PACKAGE_MANAGER": {
+            "message": "Package manager",
+            "type": "select",
+            "when": {
+                "variable": "NODE_VERSION",
+                "notEquals": ""
+            },
+            "options": ["npm", "pnpm", "yarn"]
         }
     },
     "envOptions": {
